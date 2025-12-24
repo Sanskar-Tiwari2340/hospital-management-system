@@ -11,20 +11,24 @@ services:
         value: 10000
       - key: MONGO_URI
         sync: false
-      - key: JWT_SECRET
+      - key: JWT_SECRET_KEY
         sync: false
+      - key: JWT_EXPIRES
+        value: 7d
+      - key: COOKIE_EXPIRE
+        value: 7
       - key: CLOUDINARY_CLOUD_NAME
         sync: false
       - key: CLOUDINARY_API_KEY
         sync: false
       - key: CLOUDINARY_API_SECRET
         sync: false
-      - key: FRONTEND_URL
+      - key: FRONTEND_URL_ONE
         fromService:
           type: static
           name: hospital-system-frontend
           property: url
-      - key: DASHBOARD_URL
+      - key: FRONTEND_URL_TWO
         fromService:
           type: static
           name: hospital-system-dashboard
