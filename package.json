@@ -1,0 +1,11 @@
+{
+  "name": "hospital-management-system",
+  "version": "1.0.0",
+  "description": "MERN Stack Hospital Management System",
+  "scripts": {
+    "dev": "concurrently \"npm start --prefix backend\" \"npm run dev --prefix frontend\" \"npm run dev --prefix dashboard\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
