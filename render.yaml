@@ -25,21 +25,22 @@ services:
         sync: false
       - key: FRONTEND_URL_ONE
         fromService:
-          type: static
+          type: web
           name: hospital-system-frontend
           property: url
       - key: FRONTEND_URL_TWO
         fromService:
-          type: static
+          type: web
           name: hospital-system-dashboard
           property: url
 
   # Frontend Service
-  - type: static
+  - type: web
     name: hospital-system-frontend
+    env: static
     rootDir: frontend
     buildCommand: npm run build
-    publishDir: dist
+    staticPublishPath: dist
     routes:
       - type: rewrite
         source: /*
@@ -52,11 +53,12 @@ services:
           property: url
 
   # Dashboard Service
-  - type: static
+  - type: web
     name: hospital-system-dashboard
+    env: static
     rootDir: dashboard
     buildCommand: npm run build
-    publishDir: dist
+    staticPublishPath: dist
     routes:
       - type: rewrite
         source: /*
