@@ -33,11 +33,10 @@ const AppointmentForm = () => {
   useEffect(() => {
     const fetchDoctors = async () => {
       const { data } = await axios.get(
-        "http://localhost:5000/api/v1/user/doctors",
+        `${import.meta.env.VITE_API_URL}/api/v1/user/doctors`,
         { withCredentials: true }
       );
       setDoctors(data.doctors);
-      console.log(data.doctors);
     };
     fetchDoctors();
   }, []);
@@ -46,7 +45,7 @@ const AppointmentForm = () => {
     try {
       const hasVisitedBool = Boolean(hasVisited);
       const { data } = await axios.post(
-        "http://localhost:5000/api/v1/appointment/post",
+        `${import.meta.env.VITE_API_URL}/api/v1/appointment/post`,
         {
           firstName,
           lastName,
@@ -68,19 +67,19 @@ const AppointmentForm = () => {
         }
       );
       toast.success(data.message);
-      setFirstName(""),
-        setLastName(""),
-        setEmail(""),
-        setPhone(""),
-        setNic(""),
-        setDob(""),
-        setGender(""),
-        setAppointmentDate(""),
-        setDepartment(""),
-        setDoctorFirstName(""),
-        setDoctorLastName(""),
-        setHasVisited(""),
-        setAddress("");
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPhone("");
+      setNic("");
+      setDob("");
+      setGender("");
+      setAppointmentDate("");
+      setDepartment("Pediatrics");
+      setDoctorFirstName("");
+      setDoctorLastName("");
+      setHasVisited(false);
+      setAddress("");
     } catch (error) {
       toast.error(error.response?.data?.message || "An error occurred");
     }
@@ -185,12 +184,19 @@ const AppointmentForm = () => {
                 ))}
             </select> */}
             <select
-              value={JSON.stringify({
-                firstName: doctorFirstName,
-                lastName: doctorLastName,
-              })}
+              value={
+                doctorFirstName === "" && doctorLastName === ""
+                  ? ""
+                  : JSON.stringify({
+                      firstName: doctorFirstName,
+                      lastName: doctorLastName,
+                    })
+              }
               onChange={(e) => {
-                const { firstName, lastName } = JSON.parse(e.target.value);
+                const value = e.target.value;
+                const { firstName, lastName } = value
+                  ? JSON.parse(value)
+                  : { firstName: "", lastName: "" };
                 setDoctorFirstName(firstName);
                 setDoctorLastName(lastName);
               }}
