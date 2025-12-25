@@ -6,7 +6,7 @@ const Appointment = () => {
     <>
       <Hero
         title={"Schedule Your Appointment | ZeeCare Medical Institute"}
-        imageUrl={"/appointment.png"}
+        imageUrl={"/signin.png"}
       />
       <div className="container" style={{ marginTop: "50px", marginBottom: "50px" }}>
         <h2 style={{ textAlign: "center", marginBottom: "30px" }}>How to Book Your Appointment</h2>
